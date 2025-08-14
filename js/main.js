@@ -165,35 +165,35 @@ gtag('config', 'GTM-XXXXXX');
 
 
 
-// Mobile Navigation Functionality
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const mainNav = document.querySelector('.main-nav');
     const body = document.body;
+    
+    if (!mobileMenuToggle || !mainNav) {
+        console.error("Mobile menu elements not found!");
+        return;
+    }
 
-    // Toggle mobile menu
+    // Toggle menu function
     function toggleMenu() {
         mobileMenuToggle.classList.toggle('active');
         mainNav.classList.toggle('active');
         body.classList.toggle('menu-open');
     }
 
-    // Click event for mobile menu toggle
+    // Toggle on button click
     mobileMenuToggle.addEventListener('click', function(e) {
         e.stopPropagation();
         toggleMenu();
     });
 
-    // Close menu when clicking on nav links
+    // Close when clicking links
     document.querySelectorAll('.main-nav a').forEach(link => {
-        link.addEventListener('click', function() {
-            if (window.innerWidth <= 768) {
-                toggleMenu();
-            }
-        });
+        link.addEventListener('click', toggleMenu);
     });
 
-    // Close menu when clicking outside
+    // Close when clicking outside
     document.addEventListener('click', function(e) {
         if (mainNav.classList.contains('active') && 
             !mainNav.contains(e.target) && 
@@ -202,19 +202,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Close menu on ESC key
+    // Close on ESC key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && mainNav.classList.contains('active')) {
             toggleMenu();
         }
     });
 
-    // Reset menu on window resize
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 768) {
-            mobileMenuToggle.classList.remove('active');
-            mainNav.classList.remove('active');
-            body.classList.remove('menu-open');
-        }
-    });
+    // Debugging check
+    console.log("Mobile menu script loaded");
+    console.log("Viewport width:", window.innerWidth);
 });
