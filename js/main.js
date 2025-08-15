@@ -213,3 +213,11 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log("Mobile menu script loaded");
     console.log("Viewport width:", window.innerWidth);
 });
+
+
+const hamburger = document.querySelector(".hamburger");
+const navLinks = document.querySelector(".nav-links");
+
+hamburger.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+});

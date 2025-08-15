@@ -1,39 +1,570 @@
 <!DOCTYPE html>
 <html lang="en-ZA">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | Dashishi - Our Story, Values and Team</title>
     <meta name="description" content="Learn about Dashishi Pty Ltd - our history, values, and commitment to excellence in catering and supply services in Postmasburg and Northern Cape.">
-
     <link rel="icon" type="image/png" href="assets/DashishiLogo.png">
-    <link rel="stylesheet" href="css/main.css">
+    <style>
+        /* ===== Base Styles ===== */
+        :root {
+            --primary: #E65100;
+            --primary-dark: #BF360C;
+            --secondary: #36454F;
+            --accent: #FFD700;
+            --light: #FAFAFA;
+            --dark: #212121;
+            --gray: #757575;
+            --light-gray: #E0E0E0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 8px;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--secondary);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        .lead {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: var(--gray);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ===== Header/Navbar ===== */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .main-nav a {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--secondary);
+            margin: 5px 0;
+            transition: var(--transition);
+        }
+
+        /* Mobile Nav Styles */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .main-nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 400px;
+                height: 100vh;
+                background-color: white;
+                box-shadow: var(--shadow-lg);
+                transition: var(--transition);
+                padding: 6rem 2rem 2rem;
+            }
+            
+            .main-nav.active {
+                right: 0;
+            }
+            
+            .main-nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+            
+            .mobile-menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            
+            .mobile-menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .mobile-menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            /* Prevent scrolling when menu is open */
+            body.nav-open {
+                overflow: hidden;
+            }
+        }
+
+        /* ===== About Page Styles ===== */
+        .page-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 12rem 0 6rem;
+            margin-top: 70px;
+        }
+
+        .page-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-hero .lead {
+            color: rgba(255,255,255,0.9);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        .section-intro h2 {
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-intro h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 4rem auto 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50px;
+            width: 2px;
+            height: 100%;
+            background: var(--primary-light);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 100px;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-year {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        /* Values Grid */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(230,81,0,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .value-icon img {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Clients Section */
+        .client-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            align-items: center;
+        }
+
+        .client-logos img {
+            height: 60px;
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .client-logos img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* ===== Footer ===== */
+        .site-footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 4rem 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col {
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            width: 180px;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-about {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .footer-heading {
+            color: white;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-contact {
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item i {
+            color: var(--primary);
+            margin-right: 1rem;
+            margin-top: 0.25rem;
+        }
+
+        .contact-item p, .contact-item a {
+            color: rgba(255,255,255,0.8);
+            margin: 0;
+        }
+
+        .contact-item a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            padding-bottom: 1rem;
+        }
+
+        .footer-legal {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-legal a {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.875rem;
+        }
+
+        .footer-legal a:hover {
+            color: white;
+        }
+
+        .footer-copyright {
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.875rem;
+        }
+
+        /* Font Awesome Icons */
+        .fab, .fas {
+            font-family: 'Font Awesome 5 Brands', 'Font Awesome 5 Free';
+            font-weight: 400;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .page-hero {
+                padding: 8rem 0 4rem;
+                margin-top: 60px;
+            }
+            
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .footer-bottom {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-item {
+                padding-left: 80px;
+            }
+            
+            .timeline-year {
+                width: 60px;
+                height: 60px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-
-
+    <!-- Header with Navigation -->
     <header class="main-header">
-  <div class="container">
-    <a href="/" class="logo">
-      <img src="assets/DashishiLogo.png" alt="Dashishi Logo" width="180" height="60">
-    </a>
-    
-    <button class="mobile-menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-    </button>
-    
-    <nav class="main-nav" aria-label="Main navigation">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-      <!--  <li><a href="about.html">About</a></li> -->
-        <li><a href="services.html">Services</a></li>
-       <li><a href="gallery.html">Gallery</a></li> 
-        <li><a href="contact.html" class="btn-primary">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+        <div class="container">
+            <a href="/" class="logo">
+                <img src="assets/DashishiLogo.png" alt="Dashishi Logo" width="180" height="50">
+            </a>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html" class="btn-primary">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
     <main class="about-page">
         <section class="page-hero">
@@ -65,6 +596,20 @@
                             <p>Dashishi Pty Ltd was formally registered (2017/113784/07) and expanded services to include catering for local events.</p>
                         </div>
                     </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2019</div>
+                        <div class="timeline-content">
+                            <h3>Restaurant Opening</h3>
+                            <p>Opened our first restaurant in Postmasburg, expanding our catering capabilities and local presence.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2021</div>
+                        <div class="timeline-content">
+                            <h3>Service Expansion</h3>
+                            <p>Added cleaning supplies and printing services to our portfolio, becoming a one-stop solution provider.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -79,38 +624,32 @@
                 <div class="values-grid">
                     <div class="value-card">
                         <div class="value-icon">
-                            <img src="assets/quality.png" alt="Quality" >
+                            <img src="assets/quality.png" alt="Quality">
                         </div>
                         <h3>Quality First</h3>
                         <p>We never compromise on the quality of our products and services, ensuring excellence in every delivery.</p>
                     </div>
                     <div class="value-card">
                         <div class="value-icon">
-                            <img src="assets/community.png" alt="Community" >
+                            <img src="assets/community.png" alt="Community">
                         </div>
                         <h3>Community Focus</h3>
                         <p>As a 100% black-owned business, we're committed to empowering our local community through job creation.</p>
                     </div>
-                    <!-- More value cards -->
-                </div>
-            </div>
-        </section>
-
-      <!--  <section class="team-section">
-            <div class="container">
-                <div class="section-intro">
-                    <h2>Meet Our Leadership</h2>
-                    <p class="lead">The dedicated team behind Dashishi's success</p>
-                </div>
-
-                <div class="team-grid">
-                    <div class="team-member">
-                        <img src="images/team/daphne.jpg" alt="Daphne Blance Japhta" loading="lazy">
-                        <h3>Daphne Blance Japhta</h3>
-                        <p class="position">Founder & Managing Director</p>
-                        <p class="bio">With a passion for business and community development, Daphne leads Dashishi with vision and hands-on commitment.</p>
-                    </div> -->
-                    <!-- More team members -->
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <img src="assets/integrity.png" alt="Integrity">
+                        </div>
+                        <h3>Integrity</h3>
+                        <p>We conduct all business with honesty and transparency, building trust with our clients and partners.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <img src="assets/innovation.png" alt="Innovation">
+                        </div>
+                        <h3>Innovation</h3>
+                        <p>Continuously improving our services to meet the evolving needs of our diverse client base.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -125,14 +664,147 @@
                 <div class="client-logos">
                     <img src="assets/SANDF.png" alt="SANDF" loading="lazy">
                     <img src="assets/images.jpeg" alt="Postmasburg High School" loading="lazy">
-                    <!-- More client logos -->
+                    <img src="assets/local-business.png" alt="Local Businesses" loading="lazy">
+                    <img src="assets/government.png" alt="Government Institutions" loading="lazy">
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer (same as homepage) -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: About -->
+                <div class="footer-col">
+                    <img src="assets/DashishiLogo.png" alt="Dashishi Logo" class="footer-logo" width="180">
+                    <p class="footer-about">Dashishi Pty Ltd is a proudly South African, 100% black-owned catering and supply company based in Postmasburg, Northern Cape.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="footer-col">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Services -->
+                <div class="footer-col">
+                    <h3 class="footer-heading">Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html#catering">Event Catering</a></li>
+                        <li><a href="services.html#supply">Food Supply</a></li>
+                        <li><a href="services.html#cleaning">Cleaning Products</a></li>
+                        <li><a href="services.html#printing">Printing Services</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact -->
+                <div class="footer-col">
+                    <h3 class="footer-heading">Contact Us</h3>
+                    <div class="footer-contact">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>51 Hood Street, Postmasburg, 8420, Northern Cape</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <p><a href="tel:+27748210681">074 821 0681</a></p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <p><a href="mailto:info@dashishi.co.za">info@dashishi.co.za</a></p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <p>Mon-Fri: 8AM - 5PM<br>Sat: 9AM - 1PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/terms">Terms of Service</a>
+                </div>
+                <div class="footer-copyright">
+                    <p>&copy; <span id="current-year"></span> Dashishi Pty Ltd (2017/113784/07). All Rights Reserved.</p>
+                    <p>Proudly South African | BBBEE Compliant</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            const body = document.body;
+
+            // Toggle mobile menu
+            function toggleMenu() {
+                mobileMenuToggle.classList.toggle('active');
+                mainNav.classList.toggle('active');
+                body.classList.toggle('nav-open');
+            }
+
+            // Click event for mobile menu toggle
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleMenu();
+                });
+            }
+
+            // Close menu when clicking on nav links
+            document.querySelectorAll('.main-nav a').forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        toggleMenu();
+                    }
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (mainNav.classList.contains('active') && 
+                    !mainNav.contains(e.target) && 
+                    e.target !== mobileMenuToggle) {
+                    toggleMenu();
+                }
+            });
+
+            // Close menu on ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('.main-header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-
-
